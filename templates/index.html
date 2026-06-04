@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="30">
+    <title>Homelab Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: #eaeaea;
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #e94560;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .name {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .status {
+            font-size: 1em;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .up {
+            background-color: #2d6a4f;
+            color: #74c69d;
+        }
+        .down {
+            background-color: #6b1a1a;
+            color: #e76f51;
+        }
+        .url {
+            font-size: 0.75em;
+            color: #888;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖥️ Homelab Dashboard</h1>
+    <div class="grid">
+        {% for service in services %}
+        <div class="card">
+            <div class="name">{{ service.name }}</div>
+            <div class="status {{ 'up' if service.status else 'down' }}">
+                {{ '✅ Online' if service.status else '❌ Offline' }}
+            </div>
+            <div class="url">{{ service.url }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
